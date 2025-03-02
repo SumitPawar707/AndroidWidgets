@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
     private lateinit var radioGroup:RadioGroup
     private lateinit var radioBtn:RadioButton
+    private lateinit var seekbar:SeekBar
+    private lateinit var seektxtview:TextView
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         radioGroup=findViewById(R.id.radioGroup)
+        seekbar=findViewById(R.id.seekBar)
+        seektxtview=findViewById(R.id.seektxt)
 
         radioGroup.setOnCheckedChangeListener { radiogroup, id ->
             radioBtn=findViewById(id)
@@ -36,5 +43,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        seekbar.setOnSeekBarChangeListener(object: OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                seektxtview.text="Rate = " + seekBar?.progress.toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
     }
 }
